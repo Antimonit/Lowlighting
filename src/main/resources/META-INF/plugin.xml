@@ -1,0 +1,57 @@
+<idea-plugin>
+
+    <!-- Unique id for this plugin. Must stay constant for the life of the plugin. -->
+    <id>me.khol.intellij.sdk.lowlighting</id>
+
+    <!-- Text to display as name on Preferences/Settings | Plugin page -->
+    <name>Lowlighting</name>
+
+    <!-- Product and plugin compatibility requirements -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <depends optional="true" config-file="withKotlin.xml">org.jetbrains.kotlin</depends>
+
+    <!-- Text to display as description on Preferences/Settings | Plugin page -->
+    <description>
+        <![CDATA[
+            Highlights method calls annotated with a custom annotation as if the code was unused and allows
+            folding of all such calls at once.
+        ]]>
+    </description>
+
+    <change-notes>
+        <![CDATA[
+            <b>1.0.0 (2020-10-14)</b>
+            <ul>
+                <li>The FQN of the annotation can be changed in Settings -> Tools -> Lowlighting.</li>
+                <li>Annotated method calls are displayed with the same style as unused code.</li>
+                <li>Annotated method calls can be all folded at once with IDE 'Collapse' shortcut.</li>
+            </ul>
+        ]]>
+    </change-notes>
+
+    <!-- Text to display as company information on Preferences/Settings | Plugin page -->
+    <vendor url="https://antimonit.github.io/">David Khol</vendor>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <annotator
+            language="JAVA"
+            implementationClass="me.khol.intellij.plugin.LowlightingAnnotator"
+        />
+        <lang.foldingBuilder
+            language="JAVA"
+            implementationClass="me.khol.intellij.plugin.LowlightingFoldingBuilder"
+        />
+        <applicationConfigurable
+            parentId="tools"
+            instance="me.khol.intellij.plugin.settings.AppSettingsConfigurable"
+            id="me.khol.intellij.plugin.settings.AppSettingsConfigurable"
+            displayName="Lowlighting"
+        />
+        <applicationService
+            serviceImplementation="me.khol.intellij.plugin.settings.AppSettingsState"
+        />
+    </extensions>
+
+</idea-plugin>
