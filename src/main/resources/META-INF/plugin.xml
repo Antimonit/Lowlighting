@@ -1,7 +1,7 @@
 <idea-plugin>
 
     <!-- Unique id for this plugin. Must stay constant for the life of the plugin. -->
-    <id>me.khol.intellij.sdk.lowlighting</id>
+    <id>me.khol.intellij.lowlighting</id>
 
     <!-- Text to display as name on Preferences/Settings | Plugin page -->
     <name>Lowlighting</name>
