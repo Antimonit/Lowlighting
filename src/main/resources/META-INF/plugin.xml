@@ -28,7 +28,11 @@
                 <li>Annotated method calls are displayed with the same style as unused code.</li>
                 <li>Annotated method calls can be all folded at once with IDE 'Collapse' shortcut.</li>
             </ul>
-        ]]>
+            <b>1.0.1 (2020-10-21)</b>
+            <ul>
+                <li>Update the max supported version.</li>
+            </ul>
+      ]]>
     </change-notes>
 
     <!-- Text to display as company information on Preferences/Settings | Plugin page -->
