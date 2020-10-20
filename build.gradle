@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'me.khol.intellij.plugin'
-version '1.0.0'
+version '1.0.1'
 
 repositories {
     mavenCentral()
@@ -38,5 +38,5 @@ buildSearchableOptions {
 patchPluginXml {
     version = project.version
     sinceBuild = '193'
-    untilBuild = '202'
+    untilBuild = '203.*'
 }
