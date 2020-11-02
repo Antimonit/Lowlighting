@@ -22,15 +22,19 @@
 
     <change-notes>
         <![CDATA[
+            <b>1.1.0 (2020-11-02)</b>
+            <ul>
+                <li>The plugin now works on a per-project basis. List of annotations to be lowlighted is now configured via .lowlighting file placed in the root directory of the project.</li>
+            </ul>
+            <b>1.0.1 (2020-10-21)</b>
+            <ul>
+                <li>Update the max supported version.</li>
+            </ul>
             <b>1.0.0 (2020-10-14)</b>
             <ul>
                 <li>The FQN of the annotation can be changed in Settings -> Tools -> Lowlighting.</li>
                 <li>Annotated method calls are displayed with the same style as unused code.</li>
                 <li>Annotated method calls can be all folded at once with IDE 'Collapse' shortcut.</li>
-            </ul>
-            <b>1.0.1 (2020-10-21)</b>
-            <ul>
-                <li>Update the max supported version.</li>
             </ul>
       ]]>
     </change-notes>
@@ -47,15 +51,16 @@
             language="JAVA"
             implementationClass="me.khol.intellij.plugin.LowlightingFoldingBuilder"
         />
-        <applicationConfigurable
-            parentId="tools"
-            instance="me.khol.intellij.plugin.settings.AppSettingsConfigurable"
-            id="me.khol.intellij.plugin.settings.AppSettingsConfigurable"
-            displayName="Lowlighting"
-        />
-        <applicationService
-            serviceImplementation="me.khol.intellij.plugin.settings.AppSettingsState"
-        />
+        <!-- TODO: Toggle back on when there are things to configure application-wide -->
+<!--        <applicationConfigurable-->
+<!--            parentId="tools"-->
+<!--            instance="me.khol.intellij.plugin.settings.AppSettingsConfigurable"-->
+<!--            id="me.khol.intellij.plugin.settings.AppSettingsConfigurable"-->
+<!--            displayName="Lowlighting"-->
+<!--        />-->
+<!--        <applicationService-->
+<!--            serviceImplementation="me.khol.intellij.plugin.settings.AppSettingsState"-->
+<!--        />-->
     </extensions>
 
 </idea-plugin>
