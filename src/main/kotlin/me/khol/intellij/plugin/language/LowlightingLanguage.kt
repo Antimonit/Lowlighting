@@ -1,4 +1,4 @@
-package me.khol.intellij.plugin
+package me.khol.intellij.plugin.language
 
 import com.intellij.lang.Language
 

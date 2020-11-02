@@ -1,6 +1,7 @@
 package me.khol.intellij.plugin
 
 import com.intellij.openapi.fileTypes.LanguageFileType
+import me.khol.intellij.plugin.language.LowlightingLanguage
 
 object LowlightingFileType : LanguageFileType(LowlightingLanguage) {
 
