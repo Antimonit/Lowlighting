@@ -1,5 +1,6 @@
 package me.khol.intellij.plugin.settings
 
+import com.intellij.openapi.components.service
 import com.intellij.openapi.options.Configurable
 import javax.swing.JComponent
 
@@ -14,7 +15,7 @@ class AppSettingsConfigurable : Configurable {
     private var mySettingsComponent: AppSettingsComponent? = null
 
     private val settings
-        get() = AppSettingsState.instance
+        get() = service<AppSettingsState>()
 
     override fun getDisplayName(): String = "Lowlighting"
 
