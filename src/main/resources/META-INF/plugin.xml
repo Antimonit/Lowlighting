@@ -22,6 +22,10 @@
 
     <change-notes>
         <![CDATA[
+            <b>1.1.1 (2020-11-02)</b>
+            <ul>
+                <li>Added support for .lowlighting file type.</li>
+            </ul>
             <b>1.1.0 (2020-11-02)</b>
             <ul>
                 <li>The plugin now works on a per-project basis. List of annotations to be lowlighted is now configured via .lowlighting file placed in the root directory of the project.</li>
@@ -43,6 +47,12 @@
     <vendor url="https://antimonit.github.io/">David Khol</vendor>
 
     <extensions defaultExtensionNs="com.intellij">
+        <fileType
+            name="Simple File"
+            implementationClass="me.khol.intellij.plugin.LowlightingFileType"
+            language="Lowlighting"
+            fileNames=".lowlighting"
+        />
         <annotator
             language="JAVA"
             implementationClass="me.khol.intellij.plugin.LowlightingAnnotator"
