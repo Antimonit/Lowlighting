@@ -1,7 +1,9 @@
-package me.khol.intellij.plugin
+package me.khol.intellij.plugin.language.psi
 
 import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.psi.FileViewProvider
+import me.khol.intellij.plugin.LowlightingFileType
+import me.khol.intellij.plugin.language.LowlightingLanguage
 
 class LowlightingFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, LowlightingLanguage) {
 

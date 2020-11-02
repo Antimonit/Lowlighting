@@ -48,11 +48,16 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <fileType
-            name="Simple File"
+            name="Lowlighting File"
             implementationClass="me.khol.intellij.plugin.LowlightingFileType"
             language="Lowlighting"
             fileNames=".lowlighting"
         />
+        <lang.parserDefinition
+            language="Lowlighting"
+            implementationClass="me.khol.intellij.plugin.language.LowlightingParserDefinition"
+        />
+
         <annotator
             language="JAVA"
             implementationClass="me.khol.intellij.plugin.LowlightingAnnotator"
