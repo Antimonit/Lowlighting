@@ -57,6 +57,10 @@
             language="Lowlighting"
             implementationClass="me.khol.intellij.plugin.language.LowlightingParserDefinition"
         />
+        <lang.syntaxHighlighterFactory
+            language="Lowlighting"
+            implementationClass="me.khol.intellij.plugin.LowlightingSyntaxHighlighterFactory"
+        />
 
         <annotator
             language="JAVA"
