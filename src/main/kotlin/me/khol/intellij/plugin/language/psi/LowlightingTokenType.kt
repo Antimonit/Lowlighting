@@ -6,5 +6,5 @@ import org.jetbrains.annotations.NonNls
 
 class LowlightingTokenType(@NonNls debugName: String) : IElementType(debugName, LowlightingLanguage) {
 
-    override fun toString() = "SimpleTokenType." + super.toString()
+    override fun toString() = "LowlightingTokenType." + super.toString()
 }

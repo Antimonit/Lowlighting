@@ -5,6 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LowlightingProperty extends PsiElement {
+public interface LowlightingProperty extends LowlightingNamedElement {
+
+  @Nullable
+  String getName();
+
+  @NotNull
+  PsiElement setName(@Nullable String newName);
+
+  @Nullable
+  PsiElement getNameIdentifier();
 
 }

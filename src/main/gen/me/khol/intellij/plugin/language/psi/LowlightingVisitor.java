@@ -8,6 +8,10 @@ import com.intellij.psi.PsiElement;
 public class LowlightingVisitor extends PsiElementVisitor {
 
   public void visitProperty(@NotNull LowlightingProperty o) {
+    visitNamedElement(o);
+  }
+
+  public void visitNamedElement(@NotNull LowlightingNamedElement o) {
     visitPsiElement(o);
   }
 
