@@ -9,7 +9,7 @@
   psiImplPackage="me.khol.intellij.plugin.language.psi.impl"
 
   elementTypeHolderClass="me.khol.intellij.plugin.language.psi.LowlightingTypes"
-  elementTypeClass="me.khol.intellij.plugin.language.psi.   LowlightingElementType"
+  elementTypeClass="me.khol.intellij.plugin.language.psi.LowlightingElementType"
   tokenTypeClass="me.khol.intellij.plugin.language.psi.LowlightingTokenType"
 
   psiImplUtilClass="me.khol.intellij.plugin.language.psi.impl.LowlightingPsiImplUtil"
@@ -19,4 +19,8 @@ lowlightingFile ::= item_*
 
 private item_ ::= (property|COMMENT|CRLF)
 
-property ::= (KEY? SEPARATOR VALUE?) | KEY
+property ::= KEY {
+  mixin="me.khol.intellij.plugin.language.psi.impl.LowlightingNamedElementImpl"
+  implements="me.khol.intellij.plugin.language.psi.LowlightingNamedElement"
+  methods=[getName setName getNameIdentifier]
+}

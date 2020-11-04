@@ -3,10 +3,18 @@
     <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <annotator language="kotlin"
-                   implementationClass="me.khol.intellij.plugin.LowlightingAnnotator"/>
-        <lang.foldingBuilder language="kotlin"
-                             implementationClass="me.khol.intellij.plugin.LowlightingFoldingBuilder"/>
+        <annotator
+            language="kotlin"
+            implementationClass="me.khol.intellij.plugin.LowlightingAnnotator"
+        />
+        <lang.foldingBuilder
+            language="kotlin"
+            implementationClass="me.khol.intellij.plugin.LowlightingFoldingBuilder"
+        />
+        <codeInsight.lineMarkerProvider
+            language="kotlin"
+            implementationClass="me.khol.intellij.plugin.LowlightingLineMarkerProvider"
+        />
     </extensions>
 
 </idea-plugin>

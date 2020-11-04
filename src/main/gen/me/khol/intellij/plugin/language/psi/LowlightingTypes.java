@@ -13,8 +13,6 @@ public interface LowlightingTypes {
   IElementType COMMENT = new LowlightingTokenType("COMMENT");
   IElementType CRLF = new LowlightingTokenType("CRLF");
   IElementType KEY = new LowlightingTokenType("KEY");
-  IElementType SEPARATOR = new LowlightingTokenType("SEPARATOR");
-  IElementType VALUE = new LowlightingTokenType("VALUE");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
