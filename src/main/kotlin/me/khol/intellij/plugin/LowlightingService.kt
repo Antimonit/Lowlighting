@@ -57,6 +57,6 @@ class LowlightingService(project: Project) {
     private fun VirtualFile.read(): List<String> =
         // TODO: Check differences `LoadTextUtil.loadText(this)`
         VfsUtil.loadText(this)
-            .split(System.lineSeparator())
+            .split("\n")
             .filter(String::isNotBlank)
 }
