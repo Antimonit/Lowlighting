@@ -1,13 +1,13 @@
 package me.khol.intellij.plugin.language
 
-import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.openapi.util.TextRange
+import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementResolveResult
 import com.intellij.psi.PsiPolyVariantReference
 import com.intellij.psi.PsiReferenceBase
-import me.khol.intellij.plugin.LowlightingIcons
-import me.khol.intellij.plugin.findProperties
+import com.intellij.psi.search.GlobalSearchScope
+import com.intellij.util.containers.map2Array
 
 class LowlightingReference(
     element: PsiElement,
@@ -16,24 +16,14 @@ class LowlightingReference(
 
     private val key: String = element.text.substring(textRange.startOffset, textRange.endOffset)
 
-    override fun multiResolve(incompleteCode: Boolean) = myElement.project
-        .findProperties(key)
-        .map(::PsiElementResolveResult)
-        .toTypedArray()
-
-    override fun resolve(): PsiElement? {
-        val resolveResults = multiResolve(false)
-        return if (resolveResults.size == 1) resolveResults[0].element else null
+    override fun multiResolve(incompleteCode: Boolean): Array<PsiElementResolveResult> {
+        val project = myElement.project
+        val psiFacade = JavaPsiFacade.getInstance(project)
+        val scope = GlobalSearchScope.allScope(project)
+        return psiFacade.findClasses(key, scope).map2Array(::PsiElementResolveResult)
     }
 
-    override fun getVariants() = myElement.project
-        .findProperties()
-        .filter { it.name != null && it.name!!.isNotEmpty() }
-        .map {
-            LookupElementBuilder
-                .create(it)
-                .withIcon(LowlightingIcons.FILE)
-                .withTypeText(it.containingFile.name)
-        }
-        .toTypedArray()
+    override fun resolve(): PsiElement? {
+        return multiResolve(false).firstOrNull()?.element
+    }
 }

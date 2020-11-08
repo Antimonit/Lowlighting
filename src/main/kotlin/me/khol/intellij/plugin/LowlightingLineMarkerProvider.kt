@@ -29,7 +29,7 @@ class LowlightingLineMarkerProvider : RelatedItemLineMarkerProvider() {
     ): RelatedItemLineMarkerInfo<PsiElement>? {
         val nameIdentifier = nameIdentifier ?: return null
         if (qualifiedName.isNullOrBlank()) return null
-        val properties = project.findProperties(qualifiedName)
+        val properties = project.findLowlightingProperties(qualifiedName)
         if (properties.isEmpty()) return null
         return NavigationGutterIconBuilder.create(FILE)
             .setTargets(properties)
@@ -37,4 +37,3 @@ class LowlightingLineMarkerProvider : RelatedItemLineMarkerProvider() {
             .createLineMarkerInfo(nameIdentifier)
     }
 }
-
