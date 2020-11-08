@@ -17,11 +17,23 @@
         <![CDATA[
             Highlights method calls annotated with a custom annotation as if the code was unused and allows
             folding of all such calls at once.
+
+            Just declare an annotation in Java or Kotlin and add the fully qualified name of the annotation
+            to a `.lowlighting` file placed anywhere in the project.
         ]]>
     </description>
 
     <change-notes>
         <![CDATA[
+            <b>1.2.0 (2020-11-08)</b>
+            <ul>
+                <li>Added proper lexer and parser for .lowlighting files with comments and with highlighting support.</li>
+                <li>The .lowlighting file can now be placed anywhere in the project.</li>
+                <li>Navigation support from .lowlighting file to class declaration.</li>
+                <li>Line marker for class declarations defined in .lowlighting file.</li>
+                <li>Code completion in .lowlighting file finds annotation declarations in the project.</li>
+                <li>Fixed synchronization issue in .lowlighting.</li>
+            </ul>
             <b>1.1.1 (2020-11-02)</b>
             <ul>
                 <li>Added support for .lowlighting file type.</li>
@@ -61,6 +73,18 @@
             language="Lowlighting"
             implementationClass="me.khol.intellij.plugin.LowlightingSyntaxHighlighterFactory"
         />
+        <completion.contributor
+            language="Lowlighting"
+            implementationClass="me.khol.intellij.plugin.LowlightingCompletionContributor"
+        />
+        <lang.findUsagesProvider
+            language="Lowlighting"
+            implementationClass="me.khol.intellij.plugin.language.LowlightingFindUsagesProvider"
+        />
+        <psi.referenceContributor
+            implementation="me.khol.intellij.plugin.language.LowlightingReferenceContributor"
+        />
+
         <codeInsight.lineMarkerProvider
             language="JAVA"
             implementationClass="me.khol.intellij.plugin.LowlightingLineMarkerProvider"
