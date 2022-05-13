@@ -7,6 +7,10 @@ plugins {
 group = "me.khol.intellij.plugin"
 version = "1.2.0"
 
+repositories {
+    mavenCentral()
+}
+
 sourceSets.main.configure {
     java.srcDirs("src/main/gen")
 }
