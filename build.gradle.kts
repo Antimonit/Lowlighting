@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.khol.intellij.plugin"
-version = "1.2.0"
+version = "1.3.0"
 
 repositories {
     mavenCentral()
@@ -22,7 +22,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version.set("2019.3")
+    version.set("2021.1")
     plugins.set(listOf("java", "Kotlin"))
     type.set("IC")
 }
@@ -41,6 +41,5 @@ tasks.buildSearchableOptions {
 
 tasks.patchPluginXml {
     version.set(project.version.toString())
-    sinceBuild.set("193")
-    untilBuild.set("203.*")
+    sinceBuild.set("211")
 }
