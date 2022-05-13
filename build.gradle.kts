@@ -23,6 +23,14 @@ intellij {
     type.set("IC")
 }
 
+tasks.compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+
+tasks.compileTestKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+
 tasks.buildSearchableOptions {
     enabled = false
 }
