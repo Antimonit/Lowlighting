@@ -4,5 +4,6 @@ import com.intellij.openapi.util.IconLoader
 
 object LowlightingIcons {
 
-    val FILE = IconLoader.getIcon("/icons/lowlighting.svg")
+    @JvmField
+    val FILE = IconLoader.getIcon("/icons/lowlighting.svg", javaClass)
 }

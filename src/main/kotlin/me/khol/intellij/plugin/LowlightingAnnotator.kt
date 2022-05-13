@@ -19,8 +19,9 @@ class LowlightingAnnotator : Annotator {
     }
 
     private fun highlight(call: PsiElement, holder: AnnotationHolder) {
-        holder.createAnnotation(HighlightSeverity.WEAK_WARNING, call.textRange, null).apply {
-            highlightType = ProblemHighlightType.LIKE_UNUSED_SYMBOL
-        }
+        holder.newAnnotation(HighlightSeverity.WEAK_WARNING, "Lowlight")
+            .range(call.textRange)
+            .highlightType(ProblemHighlightType.LIKE_UNUSED_SYMBOL)
+            .create()
     }
 }
