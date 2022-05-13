@@ -15,7 +15,7 @@ sourceSets.main.java.srcDirs 'src/main/gen'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
