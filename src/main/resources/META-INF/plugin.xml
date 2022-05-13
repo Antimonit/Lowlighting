@@ -25,6 +25,10 @@
 
     <change-notes>
         <![CDATA[
+            <b>1.3.0 (2022-05-14)</b>
+            <ul>
+                <li>Updated plugin to be compatible with IDEA 2021.1 and higher.</li>
+            </ul>
             <b>1.2.0 (2020-11-08)</b>
             <ul>
                 <li>Added proper lexer and parser for .lowlighting files with comments and with highlighting support.</li>
