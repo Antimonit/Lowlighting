@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     java
     id("org.jetbrains.intellij")
@@ -42,4 +45,18 @@ tasks.buildSearchableOptions {
 tasks.patchPluginXml {
     version.set(project.version.toString())
     sinceBuild.set("211")
+}
+
+val propertiesFile = rootProject.file("local.properties")
+val lowlightingToken = if (propertiesFile.exists()) {
+    val localProperties = Properties().apply {
+        load(FileInputStream(propertiesFile))
+    }
+    localProperties.getProperty("org.gradle.project.intellijPublishToken")
+} else {
+    null
+}
+
+tasks.publishPlugin {
+    token.set(lowlightingToken)
 }
