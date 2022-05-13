@@ -3,8 +3,8 @@ import java.util.Properties
 
 plugins {
     java
-    id("org.jetbrains.intellij")
-    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.intellij") version "1.5.3"
+    id("org.jetbrains.kotlin.jvm") version "1.6.21"
 }
 
 group = "me.khol.intellij.plugin"
