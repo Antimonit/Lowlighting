@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "me.khol.intellij.plugin"
-version = "1.3.0"
+version = "1.3.1"
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
@@ -25,6 +25,7 @@ tasks.buildSearchableOptions {
 tasks.patchPluginXml {
     version.set(project.version.toString())
     sinceBuild.set("211")
+    untilBuild.set("231.*")
     pluginDescription.set(me.khol.lowlighting.description)
     changeNotes.set(me.khol.lowlighting.changeNotes.toHtml())
 }
