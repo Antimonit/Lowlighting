@@ -19,7 +19,6 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ProcessingContext
 import me.khol.intellij.plugin.language.psi.LowlightingTypes
 import org.jetbrains.kotlin.idea.KotlinFileType
-import org.jetbrains.kotlin.idea.refactoring.fqName.getKotlinFqName
 import org.jetbrains.kotlin.psi.KtClass
 
 class LowlightingCompletionContributor : CompletionContributor() {
@@ -40,7 +39,7 @@ class LowlightingCompletionContributor : CompletionContributor() {
                     val project = parameters.position.project
                     resultSet.addAllElements(
                         project.findAnnotations().map {
-                            LookupElementBuilder.createWithSmartPointer(it.getKotlinFqName()?.asString() ?: "", it)
+                            LookupElementBuilder.createWithSmartPointer(it.kotlinFqName?.asString() ?: "", it)
                         }
                     )
                 }
