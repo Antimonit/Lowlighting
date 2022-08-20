@@ -9,11 +9,11 @@ plugins {
 }
 
 group = "me.khol.intellij.plugin"
-version = "1.3.1"
+version = "1.3.2"
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version.set("2021.1")
+    version.set("2022.1")
     plugins.set(listOf("java", "Kotlin"))
     type.set("IC")
 }
