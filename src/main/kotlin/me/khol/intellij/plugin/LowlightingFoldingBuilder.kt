@@ -49,8 +49,9 @@ class LowlightingFoldingBuilder : FoldingBuilderEx() {
                 }
             }
 
-        private fun PsiElement.toFoldingDescriptor(): FoldingDescriptor {
+        private fun PsiElement.toFoldingDescriptor(): FoldingDescriptor? {
             val textRange = TextRange(textRange.startOffset + 1, textRange.endOffset - 1)
+            if (textRange.isEmpty) return null
             return FoldingDescriptor(node, textRange, FOLDING_GROUP)
         }
 
