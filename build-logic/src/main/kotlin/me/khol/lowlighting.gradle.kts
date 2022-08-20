@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "me.khol.intellij.plugin"
-version = "1.3.2"
+version = "1.3.3"
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {

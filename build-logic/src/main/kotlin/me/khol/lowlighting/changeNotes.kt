@@ -9,6 +9,13 @@ import java.time.Month
 val changeNotes = ChangeNotes(
     releases = listOf(
         Release(
+            version = SemVer(1, 3, 3),
+            date = LocalDate.of(2022, Month.AUGUST, 21),
+            notes = listOf(
+                "Fixed: Do not attempt to fold an empty text range.",
+            ),
+        ),
+        Release(
             version = SemVer(1, 3, 2),
             date = LocalDate.of(2022, Month.AUGUST, 20),
             notes = listOf(
