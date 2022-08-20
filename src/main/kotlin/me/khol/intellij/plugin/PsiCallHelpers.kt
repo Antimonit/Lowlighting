@@ -1,12 +1,17 @@
 package me.khol.intellij.plugin
 
 import com.intellij.psi.PsiCall
-import org.jetbrains.kotlin.idea.refactoring.fqName.getKotlinFqName
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiMember
+import com.intellij.psi.PsiPackage
+import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.references.KtSimpleNameReference
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.nj2k.postProcessing.resolve
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtCallElement
+import org.jetbrains.kotlin.psi.KtNamedDeclaration
 import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.KtReferenceExpression
 import org.jetbrains.kotlin.psi.psiUtil.getCallNameExpression
@@ -36,9 +41,21 @@ internal fun KtCallElement.isLowlightingAnnotated(): Boolean {
 private fun isLowlightingAnnotation(entry: KtAnnotationEntry, annotations: List<String>): Boolean {
     return entry.getCallNameExpression()
         ?.resolve()
-        ?.getKotlinFqName()?.let { kotlinFqn ->
+        ?.kotlinFqName?.let { kotlinFqn ->
             annotations.any { fqn ->
                 FqName(fqn) == kotlinFqn
             }
         } ?: false
 }
+
+val PsiElement.kotlinFqName: FqName?
+    get() = when (val element = namedUnwrappedElement) {
+        is PsiPackage -> FqName(element.qualifiedName)
+        is PsiClass -> element.qualifiedName?.let(::FqName)
+        is PsiMember -> element.getName()?.let { name ->
+            val prefix = element.containingClass?.qualifiedName
+            FqName(if (prefix != null) "$prefix.$name" else name)
+        }
+        is KtNamedDeclaration -> element.fqName
+        else -> null
+    }
