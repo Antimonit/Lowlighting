@@ -8,7 +8,9 @@ A plugin for IntelliJ IDEA and Android Studio.
 Lowlights all calls to functions annotated with a custom annotation and allows
 folding of all such calls at once.
 
-<img src="images/lowlighting.png" />
+| Without lowlighting                                    | With lowlighting                                    | Lowlighting collapsed                                    |
+|--------------------------------------------------------|-----------------------------------------------------|----------------------------------------------------------|
+| <img src="images/lowlighting_without.gif" width=480 /> | <img src="images/lowlighting_with.gif" width=480 /> | <img src="images/lowlighting_collapsed.gif" width=480 /> |
 
 ## Usage
 

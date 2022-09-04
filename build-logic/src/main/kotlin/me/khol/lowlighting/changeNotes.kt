@@ -9,6 +9,13 @@ import java.time.Month
 val changeNotes = ChangeNotes(
     releases = listOf(
         Release(
+            version = SemVer(1, 3, 4),
+            date = LocalDate.of(2022, Month.AUGUST, 27),
+            notes = listOf(
+                "Fixed: Fix compatibility issues.",
+            ),
+        ),
+        Release(
             version = SemVer(1, 3, 3),
             date = LocalDate.of(2022, Month.AUGUST, 21),
             notes = listOf(
