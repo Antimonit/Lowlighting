@@ -20,15 +20,15 @@ class LowlightingParserDefinition : ParserDefinition {
 
     override fun createLexer(project: Project): Lexer = LowlightingLexerAdapter()
 
-    override fun getWhitespaceTokens(): TokenSet = WHITE_SPACES
+    override fun getWhitespaceTokens(): TokenSet = Util.WHITE_SPACES
 
-    override fun getCommentTokens(): TokenSet = COMMENTS
+    override fun getCommentTokens(): TokenSet = Util.COMMENTS
 
     override fun getStringLiteralElements() = TokenSet.EMPTY
 
     override fun createParser(project: Project): PsiParser = LowlightingParser()
 
-    override fun getFileNodeType(): IFileElementType = FILE
+    override fun getFileNodeType(): IFileElementType = Util.FILE
 
     override fun createFile(viewProvider: FileViewProvider): PsiFile = LowlightingFile(viewProvider)
 
@@ -36,9 +36,9 @@ class LowlightingParserDefinition : ParserDefinition {
 
     override fun createElement(node: ASTNode): PsiElement = LowlightingTypes.Factory.createElement(node)
 
-    companion object {
-        private val WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE)
-        private val COMMENTS = TokenSet.create(LowlightingTypes.COMMENT)
-        private val FILE = IFileElementType(LowlightingLanguage)
+    private object Util {
+        val WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE)
+        val COMMENTS = TokenSet.create(LowlightingTypes.COMMENT)
+        val FILE = IFileElementType(LowlightingLanguage)
     }
 }
