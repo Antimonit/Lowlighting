@@ -30,3 +30,7 @@ KEY_CHARACTER=[^\ \n\t\f\\] | "\\ "
 
 [^]                                                         { return TokenType.BAD_CHARACTER; }
 
+// Right click this file -> "Run JFlex Generator" when done.
+// Note: Choose the root directory if prompted for one. JFlex jar and skeleton will be downloaded to this directory
+//       but need not to be checked into the git.
+// This will generate a `LowlightingLexer.java` in the /gen source set.
