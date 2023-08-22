@@ -7,6 +7,6 @@ import me.khol.intellij.plugin.language.LowlightingLanguage
 
 class LowlightingFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, LowlightingLanguage) {
 
-    override fun getFileType() = LowlightingFileType
+    override fun getFileType() = LowlightingFileType.INSTANCE
     override fun toString() = "Lowlighting File"
 }

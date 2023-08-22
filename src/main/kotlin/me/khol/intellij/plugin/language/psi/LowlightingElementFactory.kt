@@ -15,6 +15,6 @@ object LowlightingElementFactory {
     private fun createFile(project: Project?, text: String?): LowlightingFile {
         val name = ".lowlighting"
         return PsiFileFactory.getInstance(project)
-            .createFileFromText(name, LowlightingFileType, text!!) as LowlightingFile
+            .createFileFromText(name, LowlightingFileType.INSTANCE, text!!) as LowlightingFile
     }
 }

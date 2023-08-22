@@ -12,7 +12,7 @@ fun Project.findLowlightingProperties(key: String?): List<LowlightingProperty> =
         .filter { key.equals(it.name) }
 
 fun Project.findLowlightingProperties(): List<LowlightingProperty> =
-    FileTypeIndex.getFiles(LowlightingFileType, GlobalSearchScope.allScope(this)).flatMap { virtualFile ->
+    FileTypeIndex.getFiles(LowlightingFileType.INSTANCE, GlobalSearchScope.allScope(this)).flatMap { virtualFile ->
         PsiManager.getInstance(this).findFile(virtualFile)?.let { psiFile ->
             PsiTreeUtil.getChildrenOfType(psiFile, LowlightingProperty::class.java)?.toList()
         } ?: emptyList()
