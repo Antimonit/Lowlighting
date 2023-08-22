@@ -21,49 +21,46 @@ class LowlightingFoldingBuilder : FoldingBuilderEx() {
     override fun getPlaceholderText(node: ASTNode) = node.psi.getPlaceholderText()
 
     override fun isCollapsedByDefault(node: ASTNode) = true
+}
 
-    companion object {
+// Group of folding regions that will expand/collapse together.
+private val FOLDING_GROUP = FoldingGroup.newGroup("Lowlighting Folding Group")
 
-        // Group of folding regions that will expand/collapse together.
-        private val FOLDING_GROUP = FoldingGroup.newGroup("Lowlighting Folding Group")
+private fun PsiElement.foldingDescriptors(): List<FoldingDescriptor> {
+    return kotlinFoldingDescriptors(this) + javaFoldingDescriptors(this)
+}
 
-        private fun PsiElement.foldingDescriptors(): List<FoldingDescriptor> {
-            return kotlinFoldingDescriptors(this) + javaFoldingDescriptors(this)
-        }
-
-        private fun javaFoldingDescriptors(root: PsiElement): List<FoldingDescriptor> =
-            PsiTreeUtil.findChildrenOfType(root, PsiCall::class.java).mapNotNull {
-                if (it.isLowlightingAnnotated()) {
-                    it.argumentList?.toFoldingDescriptor()
-                } else {
-                    null
-                }
-            }
-
-        private fun kotlinFoldingDescriptors(root: PsiElement): List<FoldingDescriptor> =
-            PsiTreeUtil.findChildrenOfType(root, KtCallElement::class.java).mapNotNull {
-                if (it.isLowlightingAnnotated()) {
-                    it.valueArgumentList?.toFoldingDescriptor()
-                } else {
-                    null
-                }
-            }
-
-        private fun PsiElement.toFoldingDescriptor(): FoldingDescriptor? {
-            val textRange = TextRange(textRange.startOffset + 1, textRange.endOffset - 1)
-            if (textRange.isEmpty) return null
-            return FoldingDescriptor(node, textRange, FOLDING_GROUP)
-        }
-
-        private fun PsiElement.getPlaceholderText(): String? = when (this) {
-            is PsiExpressionList -> argumentCount(expressionCount)
-            is KtValueArgumentList -> argumentCount(arguments.size)
-            else -> "..."
-        }
-
-        private fun argumentCount(count: Int): String = when (count) {
-            1 -> "$count argument"
-            else -> "$count arguments"
+private fun javaFoldingDescriptors(root: PsiElement): List<FoldingDescriptor> =
+    PsiTreeUtil.findChildrenOfType(root, PsiCall::class.java).mapNotNull {
+        if (it.isLowlightingAnnotated()) {
+            it.argumentList?.toFoldingDescriptor()
+        } else {
+            null
         }
     }
+
+private fun kotlinFoldingDescriptors(root: PsiElement): List<FoldingDescriptor> =
+    PsiTreeUtil.findChildrenOfType(root, KtCallElement::class.java).mapNotNull {
+        if (it.isLowlightingAnnotated()) {
+            it.valueArgumentList?.toFoldingDescriptor()
+        } else {
+            null
+        }
+    }
+
+private fun PsiElement.toFoldingDescriptor(): FoldingDescriptor? {
+    val textRange = TextRange(textRange.startOffset + 1, textRange.endOffset - 1)
+    if (textRange.isEmpty) return null
+    return FoldingDescriptor(node, textRange, FOLDING_GROUP)
+}
+
+private fun PsiElement.getPlaceholderText(): String? = when (this) {
+    is PsiExpressionList -> argumentCount(expressionCount)
+    is KtValueArgumentList -> argumentCount(arguments.size)
+    else -> "..."
+}
+
+private fun argumentCount(count: Int): String = when (count) {
+    1 -> "$count argument"
+    else -> "$count arguments"
 }
