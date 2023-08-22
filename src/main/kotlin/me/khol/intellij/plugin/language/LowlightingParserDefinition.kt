@@ -24,7 +24,7 @@ class LowlightingParserDefinition : ParserDefinition {
 
     override fun getCommentTokens(): TokenSet = Util.COMMENTS
 
-    override fun getStringLiteralElements() = TokenSet.EMPTY
+    override fun getStringLiteralElements(): TokenSet = TokenSet.EMPTY
 
     override fun createParser(project: Project): PsiParser = LowlightingParser()
 
