@@ -24,3 +24,6 @@ property ::= KEY {
   implements="me.khol.intellij.plugin.language.psi.LowlightingNamedElement"
   methods=[getName setName getNameIdentifier]
 }
+
+// Right click this file -> "Generate Parser Code" when done.
+// We still have to configure the .flex file to map tokens (e.g. END_OF_LINE_COMMENT) to elements (e.g. COMMENT).
