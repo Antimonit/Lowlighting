@@ -9,6 +9,13 @@ import java.time.Month
 val changeNotes = ChangeNotes(
     releases = listOf(
         Release(
+            version = SemVer(1, 4, 0),
+            date = LocalDate.of(2023, Month.AUGUST, 25),
+            notes = listOf(
+                "Updated plugin to be compatible with IDEA 2023.1 up to 2024.1.",
+            ),
+        ),
+        Release(
             version = SemVer(1, 3, 4),
             date = LocalDate.of(2022, Month.AUGUST, 27),
             notes = listOf(
