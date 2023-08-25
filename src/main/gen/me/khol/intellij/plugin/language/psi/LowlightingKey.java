@@ -7,13 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface LowlightingKey extends LowlightingNamedElement {
 
-  @Nullable
+  @NotNull
   String getName();
 
   @NotNull
   PsiElement setName(@Nullable String newName);
 
-  @Nullable
+  @NotNull
   PsiElement getNameIdentifier();
 
 }
