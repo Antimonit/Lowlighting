@@ -1,0 +1,12 @@
+# comment
+com.example.lowlighting.JavaLowlight = GENERIC_ERROR
+com.example.lowlighting.KotlinLowlight = LIKE_DEPRECATED
+
+com.example.lowlighting.MyInfo = INFO
+com.example.lowlighting.MyMarkedForRemoval = LIKE_MARKED_FOR_REMOVAL
+com.example.lowlighting.MyWarning = WARNING
+com.example.lowlighting.MyWeakWarning = WEAK_WARNING
+com.example.lowlighting.MyUnused = LIKE_UNUSED_SYMBOL
+com.example.lowlighting.MyUnknown = LIKE_UNKNOWN_SYMBOL
+com.example.lowlighting.MyDeprecated = LIKE_DEPRECATED
+com.example.lowlighting.MyError = ERROR
