@@ -8,17 +8,27 @@ import me.khol.intellij.plugin.language.psi.impl.*;
 
 public interface LowlightingTypes {
 
-  IElementType PROPERTY = new LowlightingElementType("PROPERTY");
+  IElementType KEY = new LowlightingElementType("KEY");
+  IElementType RECORD = new LowlightingElementType("RECORD");
+  IElementType SEVERITY = new LowlightingElementType("SEVERITY");
 
+  IElementType ASSIGNMENT = new LowlightingTokenType("ASSIGNMENT");
   IElementType COMMENT = new LowlightingTokenType("COMMENT");
-  IElementType CRLF = new LowlightingTokenType("CRLF");
-  IElementType KEY = new LowlightingTokenType("KEY");
+  IElementType EOL = new LowlightingTokenType("EOL");
+  IElementType KEY_TOKEN = new LowlightingTokenType("KEY_TOKEN");
+  IElementType SEVERITY_TOKEN = new LowlightingTokenType("SEVERITY_TOKEN");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == PROPERTY) {
-        return new LowlightingPropertyImpl(node);
+      if (type == KEY) {
+        return new LowlightingKeyImpl(node);
+      }
+      else if (type == RECORD) {
+        return new LowlightingRecordImpl(node);
+      }
+      else if (type == SEVERITY) {
+        return new LowlightingSeverityImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

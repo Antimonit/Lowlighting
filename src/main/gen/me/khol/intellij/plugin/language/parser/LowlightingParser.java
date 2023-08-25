@@ -36,37 +36,63 @@ public class LowlightingParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // property|COMMENT|CRLF
-  static boolean item_(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "item_")) return false;
+  // record | COMMENT | EOL
+  static boolean expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expression")) return false;
     boolean r;
-    r = property(b, l + 1);
+    r = record(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT);
-    if (!r) r = consumeToken(b, CRLF);
+    if (!r) r = consumeToken(b, EOL);
     return r;
   }
 
   /* ********************************************************** */
-  // item_*
+  // KEY_TOKEN
+  public static boolean key(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "key")) return false;
+    if (!nextTokenIs(b, KEY_TOKEN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, KEY_TOKEN);
+    exit_section_(b, m, KEY, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expression*
   static boolean lowlightingFile(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lowlightingFile")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!item_(b, l + 1)) break;
+      if (!expression(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "lowlightingFile", c)) break;
     }
     return true;
   }
 
   /* ********************************************************** */
-  // KEY
-  public static boolean property(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property")) return false;
-    if (!nextTokenIs(b, KEY)) return false;
+  // key ASSIGNMENT severity
+  public static boolean record(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "record")) return false;
+    if (!nextTokenIs(b, KEY_TOKEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, KEY);
-    exit_section_(b, m, PROPERTY, r);
+    r = key(b, l + 1);
+    r = r && consumeToken(b, ASSIGNMENT);
+    r = r && severity(b, l + 1);
+    exit_section_(b, m, RECORD, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // SEVERITY_TOKEN
+  public static boolean severity(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "severity")) return false;
+    if (!nextTokenIs(b, SEVERITY_TOKEN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SEVERITY_TOKEN);
+    exit_section_(b, m, SEVERITY, r);
     return r;
   }
 

@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LowlightingProperty extends LowlightingNamedElement {
+public interface LowlightingKey extends LowlightingNamedElement {
 
   @Nullable
   String getName();

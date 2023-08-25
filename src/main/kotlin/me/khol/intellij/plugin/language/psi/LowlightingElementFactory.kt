@@ -7,9 +7,9 @@ import me.khol.intellij.plugin.LowlightingFileType
 object LowlightingElementFactory {
 
     @JvmStatic
-    fun createProperty(project: Project?, name: String?): LowlightingProperty {
+    fun createProperty(project: Project?, name: String?): LowlightingKey {
         val file = createFile(project, name)
-        return file.firstChild as LowlightingProperty
+        return file.firstChild as LowlightingKey
     }
 
     private fun createFile(project: Project?, text: String?): LowlightingFile {

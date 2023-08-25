@@ -15,11 +15,19 @@
   psiImplUtilClass="me.khol.intellij.plugin.language.psi.impl.LowlightingPsiImplUtil"
 }
 
-lowlightingFile ::= item_*
+lowlightingFile ::= expression*
 
-private item_ ::= (property|COMMENT|CRLF)
+private expression ::= (record | COMMENT | EOL)
 
-property ::= KEY {
+record ::= key ASSIGNMENT severity
+
+key ::= KEY_TOKEN {
+  mixin="me.khol.intellij.plugin.language.psi.impl.LowlightingNamedElementImpl"
+  implements="me.khol.intellij.plugin.language.psi.LowlightingNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
+
+severity ::= SEVERITY_TOKEN {
   mixin="me.khol.intellij.plugin.language.psi.impl.LowlightingNamedElementImpl"
   implements="me.khol.intellij.plugin.language.psi.LowlightingNamedElement"
   methods=[getName setName getNameIdentifier]

@@ -6,7 +6,7 @@ import com.intellij.lang.findUsages.FindUsagesProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.tree.TokenSet
-import me.khol.intellij.plugin.language.psi.LowlightingProperty
+import me.khol.intellij.plugin.language.psi.LowlightingKey
 import me.khol.intellij.plugin.language.psi.LowlightingTypes
 
 class LowlightingFindUsagesProvider : FindUsagesProvider {
@@ -14,7 +14,7 @@ class LowlightingFindUsagesProvider : FindUsagesProvider {
     override fun getWordsScanner(): WordsScanner? {
         return DefaultWordsScanner(
             LowlightingLexerAdapter(),
-            TokenSet.create(LowlightingTypes.KEY),
+            TokenSet.create(LowlightingTypes.KEY_TOKEN),
             TokenSet.create(LowlightingTypes.COMMENT),
             TokenSet.EMPTY
         )
@@ -25,7 +25,7 @@ class LowlightingFindUsagesProvider : FindUsagesProvider {
     override fun getHelpId(psiElement: PsiElement): String? = null
 
     override fun getType(element: PsiElement): String {
-        return if (element is LowlightingProperty) {
+        return if (element is LowlightingKey) {
             "lowlighting property"
         } else {
             ""
@@ -33,7 +33,7 @@ class LowlightingFindUsagesProvider : FindUsagesProvider {
     }
 
     override fun getDescriptiveName(element: PsiElement): String {
-        return if (element is LowlightingProperty) {
+        return if (element is LowlightingKey) {
             element.name ?: ""
         } else {
             ""
