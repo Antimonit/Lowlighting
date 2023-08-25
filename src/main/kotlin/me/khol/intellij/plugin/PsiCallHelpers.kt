@@ -7,8 +7,8 @@ import com.intellij.psi.PsiMember
 import com.intellij.psi.PsiPackage
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.references.KtSimpleNameReference
+import org.jetbrains.kotlin.idea.references.mainReference
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.nj2k.postProcessing.resolve
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtCallElement
 import org.jetbrains.kotlin.psi.KtNamedDeclaration
@@ -40,6 +40,7 @@ internal fun KtCallElement.isLowlightingAnnotated(): Boolean {
 
 private fun isLowlightingAnnotation(entry: KtAnnotationEntry, annotations: List<String>): Boolean {
     return entry.getCallNameExpression()
+        ?.mainReference
         ?.resolve()
         ?.kotlinFqName?.let { kotlinFqn ->
             annotations.any { fqn ->
