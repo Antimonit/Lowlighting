@@ -27,7 +27,7 @@ public class LowlightingKeyImpl extends LowlightingNamedElementImpl implements L
   }
 
   @Override
-  @Nullable
+  @NotNull
   public String getName() {
     return LowlightingPsiImplUtil.getName(this);
   }
@@ -39,7 +39,7 @@ public class LowlightingKeyImpl extends LowlightingNamedElementImpl implements L
   }
 
   @Override
-  @Nullable
+  @NotNull
   public PsiElement getNameIdentifier() {
     return LowlightingPsiImplUtil.getNameIdentifier(this);
   }

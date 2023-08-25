@@ -23,5 +23,5 @@ fun Project.findLowlightingProperties(): List<LowlightingKey> =
 
 fun Project.findLowlightingPropertiesNames(): List<String> =
     findLowlightingProperties()
-        .mapNotNull { it.name }
+        .map { it.name }
         .filter { it.isNotEmpty() }

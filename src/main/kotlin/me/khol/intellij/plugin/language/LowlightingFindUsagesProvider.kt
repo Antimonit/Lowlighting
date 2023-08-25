@@ -34,7 +34,7 @@ class LowlightingFindUsagesProvider : FindUsagesProvider {
 
     override fun getDescriptiveName(element: PsiElement): String {
         return if (element is LowlightingKey) {
-            element.name ?: ""
+            element.name
         } else {
             ""
         }
