@@ -20,6 +20,7 @@ public class LowlightingPropertyImpl extends LowlightingNamedElementImpl impleme
     visitor.visitProperty(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof LowlightingVisitor) accept((LowlightingVisitor)visitor);
     else super.accept(visitor);
