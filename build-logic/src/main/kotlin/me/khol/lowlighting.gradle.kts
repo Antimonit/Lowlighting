@@ -13,7 +13,7 @@ version = "1.3.4"
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version.set("2022.1")
+    version.set("2023.1")
     plugins.set(listOf("java", "Kotlin"))
     type.set("IC")
 }

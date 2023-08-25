@@ -1,6 +1,6 @@
 plugins {
     id("me.khol.lowlighting")
-    id("org.jetbrains.kotlin.jvm") version "1.6.21"
+    id("org.jetbrains.kotlin.jvm") version "1.8.0"
 }
 
 repositories {
@@ -16,12 +16,10 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 }
 
-tasks.compileKotlin {
-    kotlinOptions.jvmTarget = "11"
-}
-
-tasks.compileTestKotlin {
-    kotlinOptions.jvmTarget = "11"
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 tasks.buildSearchableOptions {
