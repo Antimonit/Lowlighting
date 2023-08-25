@@ -24,8 +24,8 @@ tasks.buildSearchableOptions {
 
 tasks.patchPluginXml {
     version.set(project.version.toString())
-    sinceBuild.set("211")
-    untilBuild.set("231.*")
+    sinceBuild.set("231")
+    untilBuild.set("241.*")
     pluginDescription.set(me.khol.lowlighting.description)
     changeNotes.set(me.khol.lowlighting.changeNotes.toHtml())
 }
