@@ -6,13 +6,22 @@ import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.psi.PsiCall
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiReferenceExpression
 import org.jetbrains.kotlin.psi.KtCallElement
+import org.jetbrains.kotlin.psi.KtReferenceExpression
 
+/**
+ * The core functionality of the Lowlighting plugin.
+ *
+ * See [SimpleAnnotator docs](https://plugins.jetbrains.com/docs/intellij/annotator.html).
+ */
 class LowlightingAnnotator : Annotator {
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
-        if (element is PsiCall && element.isLowlightingAnnotated() ||
-            element is KtCallElement && element.isLowlightingAnnotated()
+        if (element is PsiCall && element.isLowlightingAnnotated()
+            || element is KtCallElement && element.isLowlightingAnnotated()
+            || element is KtReferenceExpression && element.isLowlightingAnnotated()
+            || element is PsiReferenceExpression && element.isLowlightingAnnotated()
         ) {
             highlight(element, holder)
         }
