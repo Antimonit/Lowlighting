@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static me.khol.intellij.plugin.language.psi.LowlightingTypes.*;
 import me.khol.intellij.plugin.language.psi.*;
 
-public class LowlightingPropertyImpl extends LowlightingNamedElementImpl implements LowlightingProperty {
+public class LowlightingSeverityImpl extends LowlightingNamedElementImpl implements LowlightingSeverity {
 
-  public LowlightingPropertyImpl(@NotNull ASTNode node) {
+  public LowlightingSeverityImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LowlightingVisitor visitor) {
-    visitor.visitProperty(this);
+    visitor.visitSeverity(this);
   }
 
   @Override

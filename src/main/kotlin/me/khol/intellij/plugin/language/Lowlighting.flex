@@ -15,18 +15,24 @@ import me.khol.intellij.plugin.language.psi.LowlightingTypes;
 %eof{  return;
 %eof}
 
-CRLF=\R
+EOL=\r|\n|\r\n
 WHITE_SPACE=[\ \n\t\f]
-END_OF_LINE_COMMENT=("#")[^\r\n]*
-KEY_CHARACTER=[^\ \n\t\f\\] | "\\ "
+ASSIGNMENT=[=]
+SEVERITY=[_a-zA-Z]+
+COMMENT=("#")[^\r\n]*
+KEY=[^=\ \n\t\f]
+
+%state WAITING_SEVERITY
+%state WAITING_ASSIGNMENT
 
 %%
 
-<YYINITIAL> {END_OF_LINE_COMMENT}                           { yybegin(YYINITIAL); return LowlightingTypes.COMMENT; }
-
-<YYINITIAL> {KEY_CHARACTER}+                                { yybegin(YYINITIAL); return LowlightingTypes.KEY; }
-
-({CRLF}|{WHITE_SPACE})+                                     { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
+<YYINITIAL> {COMMENT}                                       { yybegin(YYINITIAL); return LowlightingTypes.COMMENT; }
+<YYINITIAL> {KEY}+                                          { yybegin(WAITING_ASSIGNMENT); return LowlightingTypes.KEY_TOKEN; }
+<WAITING_ASSIGNMENT> {ASSIGNMENT}                           { yybegin(WAITING_SEVERITY); return LowlightingTypes.ASSIGNMENT; }
+<WAITING_SEVERITY>  {SEVERITY}                              { yybegin(YYINITIAL); return LowlightingTypes.SEVERITY_TOKEN; }
+({EOL})+                                                    { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
+({WHITE_SPACE})+                                            { return TokenType.WHITE_SPACE; }
 
 [^]                                                         { return TokenType.BAD_CHARACTER; }
 

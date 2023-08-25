@@ -14,7 +14,7 @@ class LowlightingReferenceContributor : PsiReferenceContributor() {
     override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
         // It is important that [LowlightingNamedElementImpl] overrides [getReferences].
         registrar.registerReferenceProvider(
-            PlatformPatterns.psiElement(LowlightingTypes.PROPERTY),
+            PlatformPatterns.psiElement(LowlightingTypes.KEY),
             object : PsiReferenceProvider() {
                 override fun getReferencesByElement(
                     element: PsiElement,

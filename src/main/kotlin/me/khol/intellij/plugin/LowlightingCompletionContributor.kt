@@ -29,7 +29,7 @@ class LowlightingCompletionContributor : CompletionContributor() {
     init {
         extend(
             CompletionType.BASIC,
-            PlatformPatterns.psiElement(LowlightingTypes.KEY),
+            PlatformPatterns.psiElement(LowlightingTypes.KEY_TOKEN),
             object : CompletionProvider<CompletionParameters>() {
                 public override fun addCompletions(
                     parameters: CompletionParameters,

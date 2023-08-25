@@ -5,16 +5,19 @@ import com.intellij.psi.PsiManager
 import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.util.PsiTreeUtil
-import me.khol.intellij.plugin.language.psi.LowlightingProperty
+import me.khol.intellij.plugin.language.psi.LowlightingKey
+import me.khol.intellij.plugin.language.psi.LowlightingRecord
 
-fun Project.findLowlightingProperties(key: String?): List<LowlightingProperty> =
+fun Project.findLowlightingProperties(key: String?): List<LowlightingKey> =
     findLowlightingProperties()
         .filter { key.equals(it.name) }
 
-fun Project.findLowlightingProperties(): List<LowlightingProperty> =
+fun Project.findLowlightingProperties(): List<LowlightingKey> =
     FileTypeIndex.getFiles(LowlightingFileType.INSTANCE, GlobalSearchScope.allScope(this)).flatMap { virtualFile ->
         PsiManager.getInstance(this).findFile(virtualFile)?.let { psiFile ->
-            PsiTreeUtil.getChildrenOfType(psiFile, LowlightingProperty::class.java)?.toList()
+            PsiTreeUtil.getChildrenOfType(psiFile, LowlightingRecord::class.java)?.map {
+                it.key
+            }
         } ?: emptyList()
     }
 

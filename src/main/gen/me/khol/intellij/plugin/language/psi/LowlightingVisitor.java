@@ -7,7 +7,15 @@ import com.intellij.psi.PsiElement;
 
 public class LowlightingVisitor extends PsiElementVisitor {
 
-  public void visitProperty(@NotNull LowlightingProperty o) {
+  public void visitKey(@NotNull LowlightingKey o) {
+    visitNamedElement(o);
+  }
+
+  public void visitRecord(@NotNull LowlightingRecord o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSeverity(@NotNull LowlightingSeverity o) {
     visitNamedElement(o);
   }
 

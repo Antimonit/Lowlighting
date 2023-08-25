@@ -19,6 +19,8 @@ class LowlightingLexer implements FlexLexer {
 
   /** lexical states */
   public static final int YYINITIAL = 0;
+  public static final int WAITING_SEVERITY = 2;
+  public static final int WAITING_ASSIGNMENT = 4;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -27,7 +29,7 @@ class LowlightingLexer implements FlexLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = {
-     0, 0
+     0,  0,  1,  1,  2, 2
   };
 
   /**
@@ -36,7 +38,7 @@ class LowlightingLexer implements FlexLexer {
   private static final int [] ZZ_CMAP_TOP = zzUnpackcmap_top();
 
   private static final String ZZ_CMAP_TOP_PACKED_0 =
-    "\1\0\37\u0100\1\u0200\u10df\u0100";
+    "\1\0\u10ff\u0100";
 
   private static int [] zzUnpackcmap_top() {
     int [] result = new int[4352];
@@ -64,12 +66,12 @@ class LowlightingLexer implements FlexLexer {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\11\0\1\1\1\2\1\3\1\1\1\4\22\0\1\5"+
-    "\2\0\1\6\70\0\1\7\50\0\1\3\u01a2\0\2\3"+
-    "\326\0";
+    "\11\0\1\1\1\2\1\0\1\1\1\3\22\0\1\1"+
+    "\2\0\1\4\31\0\1\5\3\0\32\6\4\0\1\6"+
+    "\1\0\32\6\u0185\0";
 
   private static int [] zzUnpackcmap_blocks() {
-    int [] result = new int[768];
+    int [] result = new int[512];
     int offset = 0;
     offset = zzUnpackcmap_blocks(ZZ_CMAP_BLOCKS_PACKED_0, offset, result);
     return result;
@@ -93,10 +95,11 @@ class LowlightingLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\1\1\3\1\4\1\0\2\3";
+    "\3\0\1\1\1\2\1\3\1\1\1\4\1\5\1\3"+
+    "\1\6\1\7\1\4";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[9];
+    int [] result = new int[13];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -121,11 +124,11 @@ class LowlightingLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\10\0\20\0\30\0\40\0\50\0\50\0\60"+
-    "\0\70";
+    "\0\0\0\7\0\16\0\25\0\34\0\43\0\52\0\61"+
+    "\0\70\0\77\0\106\0\70\0\115";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[9];
+    int [] result = new int[13];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -148,15 +151,16 @@ class LowlightingLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\2\3\2\4\1\3\1\5\1\6\1\2\2\0"+
-    "\2\2\1\0\1\2\1\7\1\0\5\3\2\0\1\2"+
-    "\2\3\2\4\1\3\1\2\1\7\1\5\1\10\1\0"+
-    "\1\5\1\2\1\10\1\5\1\11\5\0\1\2\2\0"+
-    "\2\10\1\0\1\10\1\0\5\10\1\0\1\10\1\0"+
-    "\1\5\2\10";
+    "\1\4\1\5\1\6\1\7\1\10\1\11\1\4\1\11"+
+    "\1\5\1\6\1\12\2\11\1\13\1\11\1\5\1\6"+
+    "\1\12\1\11\1\14\1\11\1\4\2\0\2\4\1\0"+
+    "\1\4\1\0\2\5\5\0\1\5\1\6\1\12\3\0"+
+    "\1\4\1\0\1\12\1\7\1\4\1\0\1\4\1\10"+
+    "\1\15\1\0\1\4\1\10\1\15\1\10\11\0\2\12"+
+    "\11\0\1\13\2\15\2\0\3\15";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[64];
+    int [] result = new int[84];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -194,10 +198,10 @@ class LowlightingLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\5\1\1\0\2\1";
+    "\3\0\5\1\1\11\2\1\1\11\1\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[9];
+    int [] result = new int[13];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -519,25 +523,40 @@ class LowlightingLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { yybegin(YYINITIAL); return LowlightingTypes.KEY;
-            }
-          // fall through
-          case 5: break;
-          case 2:
-            { yybegin(YYINITIAL); return TokenType.WHITE_SPACE;
-            }
-          // fall through
-          case 6: break;
-          case 3:
-            { yybegin(YYINITIAL); return LowlightingTypes.COMMENT;
-            }
-          // fall through
-          case 7: break;
-          case 4:
-            { return TokenType.BAD_CHARACTER;
+            { yybegin(WAITING_ASSIGNMENT); return LowlightingTypes.KEY_TOKEN;
             }
           // fall through
           case 8: break;
+          case 2:
+            { return TokenType.WHITE_SPACE;
+            }
+          // fall through
+          case 9: break;
+          case 3:
+            { yybegin(YYINITIAL); return TokenType.WHITE_SPACE;
+            }
+          // fall through
+          case 10: break;
+          case 4:
+            { yybegin(YYINITIAL); return LowlightingTypes.COMMENT;
+            }
+          // fall through
+          case 11: break;
+          case 5:
+            { return TokenType.BAD_CHARACTER;
+            }
+          // fall through
+          case 12: break;
+          case 6:
+            { yybegin(YYINITIAL); return LowlightingTypes.SEVERITY_TOKEN;
+            }
+          // fall through
+          case 13: break;
+          case 7:
+            { yybegin(WAITING_SEVERITY); return LowlightingTypes.ASSIGNMENT;
+            }
+          // fall through
+          case 14: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
