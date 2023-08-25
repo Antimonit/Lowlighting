@@ -9,6 +9,13 @@ import com.intellij.psi.PsiNameIdentifierOwner
 import me.khol.intellij.plugin.LowlightingIcons.FILE
 import org.jetbrains.kotlin.psi.KtClass
 
+/**
+ * Displays a gutter icon next to Java/Kotlin annotation class declarations whose FQN is also
+ * declared in one or more .lowlighting files.
+ *
+ * Clicking on this icon will take the user to the declaration within the .lowlighting file or
+ * show a disambiguation popup in case of multiple declarations.
+ */
 class LowlightingLineMarkerProvider : RelatedItemLineMarkerProvider() {
 
     override fun collectNavigationMarkers(
