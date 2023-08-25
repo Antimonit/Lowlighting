@@ -1,41 +1,66 @@
 package me.khol.intellij.plugin
 
-import com.intellij.psi.PsiCall
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiMember
-import com.intellij.psi.PsiPackage
+import com.intellij.psi.*
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.references.KtSimpleNameReference
 import org.jetbrains.kotlin.idea.references.mainReference
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.psi.KtAnnotationEntry
-import org.jetbrains.kotlin.psi.KtCallElement
-import org.jetbrains.kotlin.psi.KtNamedDeclaration
-import org.jetbrains.kotlin.psi.KtNamedFunction
-import org.jetbrains.kotlin.psi.KtReferenceExpression
+import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.getCallNameExpression
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-// TODO: Check also definition of methods in super classes
+// TODO: Check also definition of methods, properties and fields in super classes
+
 internal fun PsiCall.isLowlightingAnnotated(): Boolean {
     val method = resolveMethod() ?: return false
-    if (method.annotations.isEmpty()) return false
-    val annotations = project.findLowlightingPropertiesNames()
-    return method.annotations.any { annotation ->
-        annotations.any { fqn ->
+    return method.isLowLightingAnnotated()
+}
+
+internal fun PsiReferenceExpression.isLowlightingAnnotated(): Boolean {
+    val resolved = this.resolve() as? PsiModifierListOwner ?: return false
+    return resolved.isLowLightingAnnotated()
+}
+
+private fun PsiModifierListOwner.isLowLightingAnnotated(): Boolean {
+    if (annotations.isEmpty()) return false
+    val lowlighting = project.findLowlightingPropertiesNames()
+    return annotations.any { annotation ->
+        lowlighting.any { fqn ->
             fqn == annotation.qualifiedName
         }
     }
 }
 
-// TODO: Check also definition of methods in super classes
-internal fun KtCallElement.isLowlightingAnnotated(): Boolean {
-    val referenceExpression = children.find { it is KtReferenceExpression } ?: return false
-    val reference = referenceExpression.references.find { it is KtSimpleNameReference } ?: return false
-    val namedFunction = reference.resolve() as? KtNamedFunction ?: return false
-    if (namedFunction.annotationEntries.isEmpty()) return false
+internal fun KtReferenceExpression.isLowlightingAnnotated(): Boolean {
+    /*
+    val first: Boolean = false
+    if (first)
+
+        CONDITION
+          REFERENCE_EXPRESSION
+            PsiElement(IDENTIFIER)
+     */
+    val reference = this.references.firstIsInstanceOrNull<KtSimpleNameReference>() ?: return false
+    val namedDeclaration = reference.resolve() as? KtNamedDeclaration ?: return false
+    val annotationEntries = namedDeclaration.annotationEntries
+    if (annotationEntries.isEmpty()) return false
     val annotations = project.findLowlightingPropertiesNames()
-    return namedFunction.annotationEntries.any { isLowlightingAnnotation(it, annotations) }
+    return annotationEntries.any { isLowlightingAnnotation(it, annotations) }
+}
+
+internal fun KtCallElement.isLowlightingAnnotated(): Boolean {
+    /*
+    fun last(): Boolean = false
+    if (last())
+
+        CONDITION
+          CALL_EXPRESSION
+            REFERENCE_EXPRESSION
+              PsiElement(IDENTIFIER)
+            VALUE_ARGUMENT_LIST
+     */
+    val referenceExpression = children.firstIsInstanceOrNull<KtReferenceExpression>() ?: return false
+    return referenceExpression.isLowlightingAnnotated()
 }
 
 private fun isLowlightingAnnotation(entry: KtAnnotationEntry, annotations: List<String>): Boolean {
