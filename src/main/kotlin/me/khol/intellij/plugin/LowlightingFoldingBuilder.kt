@@ -32,7 +32,7 @@ private fun PsiElement.foldingDescriptors(): List<FoldingDescriptor> {
 
 private fun javaFoldingDescriptors(root: PsiElement): List<FoldingDescriptor> =
     PsiTreeUtil.findChildrenOfType(root, PsiCall::class.java).mapNotNull {
-        if (it.isLowlightingAnnotated()) {
+        if (it.lowlightingSeverities().isNotEmpty()) {
             it.argumentList?.toFoldingDescriptor()
         } else {
             null
@@ -41,7 +41,7 @@ private fun javaFoldingDescriptors(root: PsiElement): List<FoldingDescriptor> =
 
 private fun kotlinFoldingDescriptors(root: PsiElement): List<FoldingDescriptor> =
     PsiTreeUtil.findChildrenOfType(root, KtCallElement::class.java).mapNotNull {
-        if (it.isLowlightingAnnotated()) {
+        if (it.lowlightingSeverities().isNotEmpty()) {
             it.valueArgumentList?.toFoldingDescriptor()
         } else {
             null

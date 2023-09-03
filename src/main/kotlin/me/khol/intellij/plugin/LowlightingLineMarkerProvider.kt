@@ -39,7 +39,7 @@ class LowlightingLineMarkerProvider : RelatedItemLineMarkerProvider() {
         val properties = project.findLowlightingProperties(qualifiedName)
         if (properties.isEmpty()) return null
         return NavigationGutterIconBuilder.create(FILE)
-            .setTargets(properties)
+            .setTargets(properties.map { it.key })
             .setTooltipText("Navigate to Lowlighting declaration")
             .createLineMarkerInfo(nameIdentifier)
     }
