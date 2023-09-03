@@ -5,15 +5,15 @@
     <extensions defaultExtensionNs="com.intellij">
         <annotator
             language="kotlin"
-            implementationClass="me.khol.intellij.plugin.LowlightingAnnotator"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingAnnotator"
         />
         <lang.foldingBuilder
             language="kotlin"
-            implementationClass="me.khol.intellij.plugin.LowlightingFoldingBuilder"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingFoldingBuilder"
         />
         <codeInsight.lineMarkerProvider
             language="kotlin"
-            implementationClass="me.khol.intellij.plugin.LowlightingLineMarkerProvider"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingLineMarkerProvider"
         />
     </extensions>
 
