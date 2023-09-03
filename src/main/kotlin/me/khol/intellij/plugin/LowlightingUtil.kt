@@ -8,20 +8,17 @@ import com.intellij.psi.util.PsiTreeUtil
 import me.khol.intellij.plugin.language.psi.LowlightingKey
 import me.khol.intellij.plugin.language.psi.LowlightingRecord
 
-fun Project.findLowlightingProperties(key: String?): List<LowlightingKey> =
+fun Project.findLowlightingProperties(key: String?): List<LowlightingRecord> =
     findLowlightingProperties()
-        .filter { key.equals(it.name) }
+        .filter { key.equals(it.key.name) }
 
-fun Project.findLowlightingProperties(): List<LowlightingKey> =
+fun Project.findLowlightingProperties(): List<LowlightingRecord> =
     FileTypeIndex.getFiles(LowlightingFileType.INSTANCE, GlobalSearchScope.allScope(this)).flatMap { virtualFile ->
         PsiManager.getInstance(this).findFile(virtualFile)?.let { psiFile ->
-            PsiTreeUtil.getChildrenOfTypeAsList(psiFile, LowlightingRecord::class.java).map {
-                it.key
-            }
+            PsiTreeUtil.getChildrenOfTypeAsList(psiFile, LowlightingRecord::class.java)
         } ?: emptyList()
     }
 
-fun Project.findLowlightingPropertiesNames(): List<String> =
+fun Project.findLowlightingPropertiesNames(): List<LowlightingRecord> =
     findLowlightingProperties()
-        .map { it.name }
-        .filter { it.isNotEmpty() }
+        .filter { it.key.name.isNotEmpty() }

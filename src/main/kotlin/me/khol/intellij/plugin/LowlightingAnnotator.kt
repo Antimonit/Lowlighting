@@ -7,8 +7,7 @@ import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.psi.PsiCall
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReferenceExpression
-import org.jetbrains.kotlin.psi.KtCallElement
-import org.jetbrains.kotlin.psi.KtReferenceExpression
+import org.jetbrains.kotlin.psi.KtElement
 
 /**
  * The core functionality of the Lowlighting plugin.
@@ -18,19 +17,22 @@ import org.jetbrains.kotlin.psi.KtReferenceExpression
 class LowlightingAnnotator : Annotator {
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
-        if (element is PsiCall && element.isLowlightingAnnotated()
-            || element is KtCallElement && element.isLowlightingAnnotated()
-            || element is KtReferenceExpression && element.isLowlightingAnnotated()
-            || element is PsiReferenceExpression && element.isLowlightingAnnotated()
-        ) {
-            highlight(element, holder)
+        val records = when (element) {
+            // Java
+            is PsiCall -> element.lowlightingSeverities()
+            is PsiReferenceExpression -> element.lowlightingSeverities()
+            // Kotlin
+            is KtElement -> element.lowlightingSeverities()
+            else -> return
         }
-    }
 
-    private fun highlight(call: PsiElement, holder: AnnotationHolder) {
+        val severity = records
+            .map { ProblemHighlightType.valueOf(it.severity.name) }
+            .maxByOrNull { it.ordinal } ?: return
+
         holder.newAnnotation(HighlightSeverity.WEAK_WARNING, "Lowlight")
-            .range(call.textRange)
-            .highlightType(ProblemHighlightType.LIKE_UNUSED_SYMBOL)
+            .range(element.textRange)
+            .highlightType(severity)
             .create()
     }
 }
