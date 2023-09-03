@@ -6,6 +6,7 @@ import com.intellij.codeInsight.completion.CompletionProvider
 import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.codeInsight.completion.CompletionType
 import com.intellij.codeInsight.lookup.LookupElementBuilder
+import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.ide.highlighter.JavaFileType
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
@@ -21,6 +22,9 @@ import me.khol.intellij.plugin.language.psi.LowlightingTypes
 import org.jetbrains.kotlin.idea.KotlinFileType
 import org.jetbrains.kotlin.psi.KtClass
 
+/**
+ * Display suggestions when typing out keys in .lowlighting files.
+ */
 class LowlightingCompletionContributor : CompletionContributor() {
 
     // TODO: Find a way to provide completion results only for the current module and its source sets.
@@ -40,6 +44,23 @@ class LowlightingCompletionContributor : CompletionContributor() {
                     resultSet.addAllElements(
                         project.findAnnotations().map {
                             LookupElementBuilder.createWithSmartPointer(it.kotlinFqName?.asString() ?: "", it)
+                        }
+                    )
+                }
+            }
+        )
+        extend(
+            CompletionType.BASIC,
+            PlatformPatterns.psiElement(LowlightingTypes.SEVERITY_TOKEN),
+            object : CompletionProvider<CompletionParameters>() {
+                public override fun addCompletions(
+                    parameters: CompletionParameters,
+                    context: ProcessingContext,
+                    resultSet: CompletionResultSet
+                ) {
+                    resultSet.addAllElements(
+                        ProblemHighlightType.values().map {
+                            LookupElementBuilder.create(it)
                         }
                     )
                 }
