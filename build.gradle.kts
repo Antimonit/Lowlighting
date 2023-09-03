@@ -25,3 +25,11 @@ java {
 tasks.buildSearchableOptions {
     enabled = false
 }
+
+/*
+ * We need the following to resolve `Cannot resolve symbol` errors when testing highlighting.
+ * https://plugins.jetbrains.com/docs/intellij/testing-faq.html#how-to-test-a-jvm-language
+ */
+tasks.test {
+    systemProperty("idea.home.path", "../intellij-community")
+}
