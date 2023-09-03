@@ -11,6 +11,10 @@ sourceSets.main.configure {
     java.srcDirs("src/main/gen")
 }
 
+sourceSets.register("testData") {
+    java.srcDirs("src/test/testData")
+}
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     testImplementation("junit:junit:4.13.2")
