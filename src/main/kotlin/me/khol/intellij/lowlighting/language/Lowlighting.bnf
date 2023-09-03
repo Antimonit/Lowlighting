@@ -1,0 +1,37 @@
+{
+  parserClass="me.khol.intellij.lowlighting.language.parser.LowlightingParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Lowlighting"
+  psiImplClassSuffix="Impl"
+  psiPackage="me.khol.intellij.lowlighting.language.psi"
+  psiImplPackage="me.khol.intellij.lowlighting.language.psi.impl"
+
+  elementTypeHolderClass="me.khol.intellij.lowlighting.language.psi.LowlightingTypes"
+  elementTypeClass="me.khol.intellij.lowlighting.language.psi.LowlightingElementType"
+  tokenTypeClass="me.khol.intellij.lowlighting.language.psi.LowlightingTokenType"
+
+  psiImplUtilClass="me.khol.intellij.lowlighting.language.psi.impl.LowlightingPsiImplUtil"
+}
+
+lowlightingFile ::= expression*
+
+private expression ::= (record | COMMENT | EOL)
+
+record ::= key ASSIGNMENT severity
+
+key ::= KEY_TOKEN {
+  mixin="me.khol.intellij.lowlighting.language.psi.impl.LowlightingNamedElementImpl"
+  implements="me.khol.intellij.lowlighting.language.psi.LowlightingNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
+
+severity ::= SEVERITY_TOKEN {
+  mixin="me.khol.intellij.lowlighting.language.psi.impl.LowlightingNamedElementImpl"
+  implements="me.khol.intellij.lowlighting.language.psi.LowlightingNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
+
+// Right click this file -> "Generate Parser Code" when done.
+// We still have to configure the .flex file to map tokens (e.g. END_OF_LINE_COMMENT) to elements (e.g. COMMENT).

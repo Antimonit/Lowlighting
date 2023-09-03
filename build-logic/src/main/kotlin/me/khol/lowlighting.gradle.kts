@@ -8,7 +8,7 @@ plugins {
     id("org.jetbrains.intellij")
 }
 
-group = "me.khol.intellij.plugin"
+group = "me.khol.intellij.lowlighting"
 version = "1.4.0"
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/

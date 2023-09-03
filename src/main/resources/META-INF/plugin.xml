@@ -18,52 +18,52 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType
             name="Lowlighting File"
-            implementationClass="me.khol.intellij.plugin.LowlightingFileType"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingFileType"
             language="Lowlighting"
             fileNames=".lowlighting"
         />
         <lang.parserDefinition
             language="Lowlighting"
-            implementationClass="me.khol.intellij.plugin.language.LowlightingParserDefinition"
+            implementationClass="me.khol.intellij.lowlighting.language.LowlightingParserDefinition"
         />
         <lang.syntaxHighlighterFactory
             language="Lowlighting"
-            implementationClass="me.khol.intellij.plugin.LowlightingSyntaxHighlighterFactory"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingSyntaxHighlighterFactory"
         />
         <completion.contributor
             language="Lowlighting"
-            implementationClass="me.khol.intellij.plugin.LowlightingCompletionContributor"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingCompletionContributor"
         />
         <lang.findUsagesProvider
             language="Lowlighting"
-            implementationClass="me.khol.intellij.plugin.language.LowlightingFindUsagesProvider"
+            implementationClass="me.khol.intellij.lowlighting.language.LowlightingFindUsagesProvider"
         />
         <psi.referenceContributor
-            implementation="me.khol.intellij.plugin.language.LowlightingReferenceContributor"
+            implementation="me.khol.intellij.lowlighting.language.LowlightingReferenceContributor"
         />
 
         <codeInsight.lineMarkerProvider
             language="JAVA"
-            implementationClass="me.khol.intellij.plugin.LowlightingLineMarkerProvider"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingLineMarkerProvider"
         />
 
         <annotator
             language="JAVA"
-            implementationClass="me.khol.intellij.plugin.LowlightingAnnotator"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingAnnotator"
         />
         <lang.foldingBuilder
             language="JAVA"
-            implementationClass="me.khol.intellij.plugin.LowlightingFoldingBuilder"
+            implementationClass="me.khol.intellij.lowlighting.LowlightingFoldingBuilder"
         />
         <!-- TODO: Toggle back on when there are things to configure application-wide -->
 <!--        <applicationConfigurable-->
 <!--            parentId="tools"-->
-<!--            instance="me.khol.intellij.plugin.settings.AppSettingsConfigurable"-->
-<!--            id="me.khol.intellij.plugin.settings.AppSettingsConfigurable"-->
+<!--            instance="me.khol.intellij.lowlighting.settings.AppSettingsConfigurable"-->
+<!--            id="me.khol.intellij.lowlighting.settings.AppSettingsConfigurable"-->
 <!--            displayName="Lowlighting"-->
 <!--        />-->
 <!--        <applicationService-->
-<!--            serviceImplementation="me.khol.intellij.plugin.settings.AppSettingsState"-->
+<!--            serviceImplementation="me.khol.intellij.lowlighting.settings.AppSettingsState"-->
 <!--        />-->
     </extensions>
 
