@@ -12,7 +12,9 @@ val changeNotes = ChangeNotes(
             version = SemVer(1, 4, 0),
             date = LocalDate.of(2023, Month.AUGUST, 25),
             notes = listOf(
-                "Updated plugin to be compatible with IDEA 2023.1 up to 2024.1.",
+                "Updated plugin to be compatible with IDEA 2022.3 up to 2024.1.",
+                "The .lowlighting file now requires to specify severity for each annotation.",
+                "Add support for highlighting Java fields and Kotlin properties in addition to methods",
             ),
         ),
         Release(
