@@ -20,6 +20,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 }
 
+// https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html#platformVersions
+// 2022.3 requires Java 17
+// 2020.3 requires Java 11
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
