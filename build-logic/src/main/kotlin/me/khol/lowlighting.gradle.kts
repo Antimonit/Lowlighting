@@ -12,19 +12,21 @@ group = "me.khol.intellij.lowlighting"
 version = "1.4.0"
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
+// See https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
 intellij {
-    version.set("2023.1")
+    version.set("2022.3")
     plugins.set(listOf("java", "Kotlin"))
     type.set("IC")
 }
 
+// https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin-faq.html#how-to-disable-building-searchable-options
 tasks.buildSearchableOptions {
     enabled = false
 }
 
 tasks.patchPluginXml {
     version.set(project.version.toString())
-    sinceBuild.set("231")
+    sinceBuild.set("223")
     untilBuild.set("241.*")
     pluginDescription.set(me.khol.lowlighting.description)
     changeNotes.set(me.khol.lowlighting.changeNotes.toHtml())

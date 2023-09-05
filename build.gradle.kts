@@ -36,6 +36,9 @@ tasks.buildSearchableOptions {
 /*
  * We need the following to resolve `Cannot resolve symbol` errors when testing highlighting.
  * https://plugins.jetbrains.com/docs/intellij/testing-faq.html#how-to-test-a-jvm-language
+ *
+ * It might be necessary to check out an older branch in the intellij-community repository,
+ * such as `origin/222` or `origin/223`.
  */
 tasks.test {
     systemProperty("idea.home.path", "../intellij-community")
